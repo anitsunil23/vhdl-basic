@@ -1,0 +1,24 @@
+library ieee;
+use ieee.std_logic_1164.all;
+entity muxx8 is
+port(i:in std_logic_vector(7 downto 0);
+s:in std_logic_vector(2 downto 0);
+z:out std_logic);
+end muxx8;
+architecture myarch of muxx8 is
+signal t:std_logic_vector(2 downto 0);
+signal a:std_logic_vector(7 downto 0);
+begin
+s(0)<= not t(0);
+s(1)<= not t(1);
+s(2)<= not t(2);
+a(0)<=i(0) and s(0) and s(1) and s(2);
+a(1)<=i(1) and s(0) and s(1) and t(2);
+a(2)<=i(2) and s(0) and t(1) and s(2);
+a(3)<=i(3) and s(0) and t(1) and t(2);
+a(4)<=i(4) and t(0) and s(1) and s(2);
+a(5)<=i(5) and t(0) and s(1) and t(2);
+a(6)<=i(6) and t(0) and t(1) and s(2);
+a(7)<=i(7) and t(0) and t(1) and t(2);
+z<=a(0) or a(1) or a(2)or a(3)or a(4)or a(5)or a(6)or a(7);
+end myarch;
